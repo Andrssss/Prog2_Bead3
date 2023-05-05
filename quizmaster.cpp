@@ -55,11 +55,6 @@ void Quizmaster::jatek(vector<Widget*>& widgets)
                         else              widgets[focus]->_tipus = 2 ; /// X
                         kor_szamolo ++;
                         mar_vege = game_over(widgets,_oszto);
-
-                        ///std::cout << mar_vege<< std::endl;
-
-                        ///for (size_t i=0;i<widgets.size();i++) { std::cout << widgets[i]->_tipus << " " ;}
-                        ///std::cout << std::endl;
                     }
                 }
                 /// TARTALOM KIIRAS

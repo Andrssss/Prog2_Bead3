@@ -4,43 +4,60 @@
 #include "graphics.hpp"
 #include <ctime>
 #include <cstdlib>
-#include <vector>
-#include <iostream>
+//#include <vector>
+//#include <iostream>
 
 using namespace genv;
-using std::vector;
-using std::cout;
-using std::endl;
+///using std::vector;
+
+
+
 
 Quizmaster::Quizmaster(int x, int y,int oszto) : _x(x), _y(y), _oszto(oszto)
 {
     genv::gout.open(_x,_y); /// _x és _y a palyameret
-                            /// _oszto, pedig az nxn -es pálya felosztás
+                            /// _oszto, pedig az n x n -es pálya felosztás
 }
 
 
 
 
-void Quizmaster::jatek(vector<Widget*>& widgets)
+//void Quizmaster::jatek(vector<Widget*>& widgets)
+void Quizmaster::jatek()
 {
+    /// Alap beállítások a játékhoz ------------------------------------------------------------------
     event ev;
     int focus = -1;
-    ///int oszlop = -1;
-    gin.timer(400);
-     /// x-poz , y-poz
+    gin.timer(400); /// hogy szép dinamikája legyen a rajzolásnak
+    Draw draww(_oszto); /// hogy megtudjuk hívni a rajzoló fvg-ket
+    int mar_vege = -1;
+
+
+    /// Minden mező deklarárása ------------------------------------------------------------------
+    vector<Widget*> widgets;
+    for(int j =0; j<_x ; j+=_x/_oszto ) /// X rács rajzol
+    {
+        for(int i =0; i<_y ; i+=_y/_oszto ) /// Y rács rajzol
+        {
+            Widget *k = new Widget(i, j, _x/_oszto, _y/_oszto, 0); /// 0 azt jelenti, hogy még egyik játékos se választotta ki a mezőt
+            widgets.push_back(k);
+        }
+    }
+    /// Rácsok indexelésére egy 3x3 -as példa :
+    /// 1 2 3
+    /// 4 5 6
+    /// 7 8 9
+    /// ez csak a játék vizsgálatánál fontos
 
     /// KI KEZDJEN ------------------------------------------------------------------
     std::srand(std::time(0));
     int kor_szamolo= rand() % 2;
-    int mar_vege = -1;
 
-    /// minden mezõbõl csinálok egy widgetet..... NEM HATÁKONY
 
-    ///Widget palya;
-
+    /// Maga a játék menete ----------------------------------------------------------
     while(gin >> ev && ev.keycode != key_escape ) {
-        if(mar_vege == 1) widgets[0]->game_over_screen(1,_x,_y); /// KÖR win
-        if(mar_vege == 2) widgets[0]->game_over_screen(2,_x,_y); /// X win
+        if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
+        if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
         else if(mar_vege == -1)
         {
                 if (ev.button == btn_left && ev.type == ev_mouse){ /// BEILLESZTÉS ----> TÖMB KEZELÉS
@@ -77,29 +94,10 @@ void Quizmaster::jatek(vector<Widget*>& widgets)
                     }
                 }
 
-
-
-
-
-
-
-
-
-
-                /*if(egy sorban vagy 1 oszlopban 5)
-                  /// GAME OVER
-                */
-
-                int i = _oszto;
-
-                 gout << refresh;
-                Draw draww(i);
                 draww.palyarajzol(_x,_y);
         }
     }
 }
-
-
 
 
 
@@ -120,7 +118,6 @@ int Quizmaster::game_over(vector<Widget*>& widget,int oszto)
     return_ertek = egyezes_vizsgal(widget, 1, 1); /// 1 - 1
     if(return_ertek != -1) return 1;
     return_ertek = egyezes_vizsgal(widget, 2 , 1);
-     // cout << return_ertek;
     if(return_ertek != -1) return 2;
     return_ertek = egyezes_vizsgal(widget, 1 , _oszto); /// OSZTO - 20
     if(return_ertek != -1) return 1;

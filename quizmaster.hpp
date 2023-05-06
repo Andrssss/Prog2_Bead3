@@ -1,6 +1,5 @@
 #ifndef GUIZMASTER_HPP_INCLUDED
 #define GUIZMASTER_HPP_INCLUDED
-#include "graphics.hpp"
 #include "draw.hpp"
 #include "widgets.hpp"
 #include <vector>
@@ -16,10 +15,8 @@ protected:
     int _x, _y, _oszto;
 
 public:
-    //int _oszto;
     Quizmaster(int x, int y, int oszto);
-    //void jatek(vector<vector<Widget*>>& widgets);
-    void jatek(vector<Widget*>& widgets);
+    void jatek();
     int game_over(vector<Widget*>& widgets,int oszto);
     int egyezes_vizsgal(vector<Widget*>& widgets,int tipus, int oszto);
     //bool sorellenorzes(vector<Widget*>& widgets,int tipus);

@@ -18,4 +18,3 @@ void pehely::rajzol()
     gout << move_to(x,y) << color(r,g,b)  << text(s);
 }
 
-

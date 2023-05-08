@@ -1,3 +1,4 @@
+
 #ifndef PEHELY_H_INCLUDED
 #define PEHELY_H_INCLUDED
 #include <iostream>
@@ -28,4 +29,3 @@ public : /// hogy át tudjuk alakítani széppé
 };
 
 #endif // PEHELY_H_INCLUDED
-

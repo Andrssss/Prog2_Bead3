@@ -28,9 +28,10 @@ void Quizmaster::jatek()
     /// Alap beállítások a játékhoz ------------------------------------------------------------------
     event ev;
     int focus = -1;
-    gin.timer(400); /// hogy szép dinamikája legyen a rajzolásnak
-    Draw draww(_oszto); /// hogy megtudjuk hívni a rajzoló fvg-ket
+    gin.timer(10); /// hogy szép dinamikája legyen a rajzolásnak
+    Draw draww(_oszto,_x,_y); /// hogy megtudjuk hívni a rajzoló fvg-ket
     int mar_vege = -1;
+    int menu_return = 0;
 
 
     /// Minden mező deklarárása ------------------------------------------------------------------
@@ -52,50 +53,58 @@ void Quizmaster::jatek()
     /// KI KEZDJEN ------------------------------------------------------------------
     std::srand(std::time(0));
     int kor_szamolo= rand() % 2;
-
+    int elso=0; /// azért kell
 
     /// Maga a játék menete ----------------------------------------------------------
     while(gin >> ev && ev.keycode != key_escape ) {
-        if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
-        if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
-        else if(mar_vege == -1)
-        {
-                if (ev.button == btn_left && ev.type == ev_mouse){ /// BEILLESZTÉS ----> TÖMB KEZELÉS
-                    for (size_t i=0;i<widgets.size();i++) {
-                        if (widgets[i]->is_selected(ev.pos_x, ev.pos_y)) {
-                                focus = i;
-                        }
-                    }
-                    if (widgets[focus]->_tipus == 0 )
-                    {
-                        if(kor_szamolo%2 ) widgets[focus]->_tipus = 1 ; /// KÖR
-                        else              widgets[focus]->_tipus = 2 ; /// X
-                        kor_szamolo ++;
-                        mar_vege = game_over(widgets,_oszto);
-                    }
-                }
-                /// TARTALOM KIIRAS
-                for (size_t i=0;i<widgets.size();i++) {
-                        //std::string s = std::to_string(i);
-                    widgets[i]->draw();
-                }
-                if (ev.type == ev_mouse) {   /// AKTÍV KÖVETÉS---> WIDGET HÍVÁS
-                    for (size_t i=0;i<widgets.size();i++) {
-                        if (widgets[i]->is_selected(ev.pos_x, ev.pos_y)) {
-                                focus = i;
-                                break;
-                        }
-                    }
-                    for(size_t i=0;i<widgets.size();i++){
-                        if(widgets[i]->_x == widgets[focus]->_x || widgets[i]->_y == widgets[focus]->_y)
-                        {
-                            widgets[i]->szinez(kor_szamolo);
-                        }
-                    }
-                }
+        if(menu_return==0) draww.menu(ev);
+        if(ev.button == btn_left)  menu_return=1;
 
-                draww.palyarajzol(_x,_y);
+         if(menu_return==1) /// LETS PLAY ------------
+        {
+                        if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
+                        if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
+                        else if(mar_vege == -1)
+                        {
+                            gin.timer(100);
+
+
+                                /// TARTALOM KIIRAS
+                                for (size_t i=0;i<widgets.size();i++) {
+                                        //std::string s = std::to_string(i);
+                                    if (widgets[i]->_tipus != 0 ) widgets[i]->draw();
+                                }
+                                if (ev.type == ev_mouse ) {   /// AKTÍV KÖVETÉS---> WIDGET HÍVÁS
+                                    for (size_t i=0;i<widgets.size();i++) {
+                                        if (widgets[i]->is_selected(ev.pos_x, ev.pos_y)) {
+                                                focus = i;
+                                                break;
+                                        }
+                                    }
+
+                                    for(size_t i=0;i<widgets.size();i++){
+                                        if(widgets[i]->_x == widgets[focus]->_x || widgets[i]->_y == widgets[focus]->_y )
+                                        {
+                                            widgets[i]->szinez(kor_szamolo);
+                                        }
+                                    }
+                                }
+                                if (ev.button == btn_left && elso!=0 && widgets[focus]->_tipus==0) /// BEILLESZTÉS ----> TÖMB KEZELÉS
+                                {
+                                        if(kor_szamolo%2 ) widgets[focus]->_tipus = 1 ; /// KÖR
+                                        else              widgets[focus]->_tipus = 2 ; /// X
+                                        kor_szamolo ++;
+                                        if(widgets.size() > 8) mar_vege = game_over(widgets,_oszto);
+
+                                }
+                                elso ++;
+                                draww.palyarajzol(_x,_y);
+                        }
         }
+    }
+    for(int i=0;i<widgets.size();i++)
+    {
+        delete widgets[i];
     }
 }
 

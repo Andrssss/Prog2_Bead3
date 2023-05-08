@@ -45,29 +45,6 @@ void Widget::szinez(int korszamolo) /// Ez színezi a mozgó egér mögött a háttere
 
 
 
-void Widget::game_over_screen(int tipus,int XX,int YY)
-{
-    std::string s;
-    /// Háttér ---------------------------
-    if(tipus == 1)
-    {
-        s = "RED WIN";
-        gout << color(255,51,51) << move_to(0,0) << box(XX,YY);
-    }
-    if(tipus == 2)
-    {
-        s = "BLUE WIN";
-        gout << color(51,51,255) << move_to(0,0) << box(XX,YY);
-    }
-
-    /// Szöveg ---------------------------
-    gout << color(255, 255, 255);
-    szoveg_kozepre_irat(s);
-    gout << refresh;
-}
-
-
-
 
 
 void Widget::draw()

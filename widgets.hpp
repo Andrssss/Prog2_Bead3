@@ -22,7 +22,6 @@ public:
     virtual void szinez(int korszamolo);
     virtual void draw();
     virtual void szoveg_kozepre_irat(std::string s);
-    virtual void game_over_screen(int tipus,int XX,int YY);
 };
 
                                                                                                                                                                                                                                                                   //szeretnek pontlevonast kerni a beadandomra mert feltoltottem egy oktatasi segedletet sajat munka helyett :)

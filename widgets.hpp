@@ -23,7 +23,4 @@ public:
     virtual void draw();
     virtual void szoveg_kozepre_irat(std::string s);
 };
-
-                                                                                                                                                                                                                                                                  //szeretnek pontlevonast kerni a beadandomra mert feltoltottem egy oktatasi segedletet sajat munka helyett :)
-
 #endif // WIDGETS_HPP_INCLUDED

@@ -15,12 +15,12 @@ class Draw {
 public:
      Draw(int oszto,int XX,int YY) : _oszto(oszto),_XX(XX),_YY(YY){
 
-            for(int i=0; i < 200; i++)
+            for(int i=0; i < 50; i++)
             {
                 pehely *p = new pehely(255,0,0,"X",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
                 v.push_back(p);
             }
-            for(int i=0; i < 200; i++)
+            for(int i=0; i < 50; i++)
             {
 
                 pehely *p = new pehely(0,0,255,"O",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
@@ -31,7 +31,4 @@ public:
      static void game_over_screen(int tipus,int XX,int YY);
      int menu(genv::event ev);
 };
-
-                                                                                                                                                                                                                                                                  //szeretnek pontlevonast kerni a beadandomra mert feltoltottem egy oktatasi segedletet sajat munka helyett :)
-
 #endif // DRAW_HPP_INCLUDED

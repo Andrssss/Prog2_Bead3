@@ -1,8 +1,25 @@
 #include "draw.hpp"
 #include "graphics.hpp"
-#include <vector>
+//#include <vector>
 
 using namespace genv;
+
+/*Draw::Draw(oszto, XX, YY) {
+            _oszto=oszto;
+            _XX=XX;
+            _YY=YY;
+            for(int i=0; i < 50; i++)
+            {
+                pehely *p = new pehely(255,0,0,"X",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
+                v.push_back(p);
+            }
+            for(int i=0; i < 50; i++)
+            {
+                pehely *p = new pehely(0,0,255,"O",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
+                v.push_back(p);
+            }
+}*/
+
 
 
  void Draw::palyarajzol(int x,int y)
@@ -15,6 +32,9 @@ using namespace genv;
 
 
     gout << refresh;
+
+
+
     /// HÁTTÉR ------------------------------------
     gout << move_to(0,0) << color(0,0,0) << box(x,y);
 
@@ -85,9 +105,6 @@ int Draw::menu(genv::event ev)
         gout << move_to(_XX/2-gout.twidth(s)/2,
                         _YY/2-(gout.cascent()+gout.cdescent())/2)
              << text(s);
-
-
-
     gout << refresh;
 }
 

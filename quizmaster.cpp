@@ -58,10 +58,17 @@ void Quizmaster::jatek()
 
     /// Maga a játék menete ----------------------------------------------------------
     while(gin >> ev && ev.keycode != key_escape ) {
-        //if(ev.type != ev_timer) std::cout  <<std::endl;
-        //std::cout << ev_timer ;
         if(  menu_return==0 && ev.type == ev_timer) draww.menu(ev);
-        if(ev.button == btn_left)  menu_return=1;
+
+
+        if(ev.button == btn_left)
+        {
+            menu_return=1;
+            draww.menu_freememory();
+        }
+
+
+
 
          if(menu_return==1) /// LETS PLAY ------------
         {

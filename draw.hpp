@@ -34,10 +34,12 @@ public:
 
 
     /// ---- Függvények ----
-     void palyarajzol(int x,int y) const;
      static void game_over_screen(int tipus,int XX,int YY);
      /// Függetlenség az objektum példányoktól: Ha egy függvényt static kulcsszóval jelölünk, akkor az nem függ semmilyen objektum példánytól.
      /// Ez azt jelenti, hogy a függvényt közvetlenül az osztályra lehet meghívni, nem pedig egy adott objektumra
+
      int menu(genv::event ev) const;
+     void menu_freememory();
+     void palyarajzol(int x,int y) const;
 };
 #endif // DRAW_HPP_INCLUDED

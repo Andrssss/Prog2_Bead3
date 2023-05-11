@@ -20,7 +20,13 @@ using namespace genv;
             }
 }*/
 
-
+void Draw::menu_freememory()
+{
+    for (pehely* p : v) {
+        delete p;
+    }
+    v.clear();
+}
 
  void Draw::palyarajzol(int x,int y) const
 {

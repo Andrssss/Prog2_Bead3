@@ -13,7 +13,7 @@ void pehely::mozog() /// HOESÉS--------------
         if(x<0) x=_XX-1;
         if(y<0) y=_YY-1;
 }
-void pehely::rajzol()
+void pehely::rajzol() const
 {
     gout << move_to(x,y) << color(r,g,b)  << text(s);
 }

@@ -7,6 +7,7 @@
 //#include <vector>
 //#include <iostream>
 
+
 using namespace genv;
 ///using std::vector;
 
@@ -28,7 +29,7 @@ void Quizmaster::jatek()
     /// Alap beállítások a játékhoz ------------------------------------------------------------------
     genv::event ev;
     int focus = -1;
-    genv::gin.timer(5); /// hogy szép dinamikája legyen a rajzolásnak
+    genv::gin.timer(150); /// hogy szép dinamikája legyen a rajzolásnak
     Draw draww(_oszto,_x,_y); /// hogy megtudjuk hívni a rajzoló fvg-ket
     int mar_vege = -1;
     int menu_return = 0;
@@ -39,8 +40,8 @@ void Quizmaster::jatek()
     for(int j =0; j<_x ; j+=_x/_oszto ) /// X rács rajzol
     {
         for(int i =0; i<_y ; i+=_y/_oszto ) /// Y rács rajzol
-        {
-            Widget *k = new Widget(i, j, _x/_oszto, _y/_oszto, 0); /// 0 azt jelenti, hogy még egyik játékos se választotta ki a mezőt
+        {   ///    Widget(int x, int y, int sx, int sy, int tipus )
+            Widget *k = new Widget(i, j, (_x/_oszto), (_y/_oszto), 0); /// 0 azt jelenti, hogy még egyik játékos se választotta ki a mezőt
             widgets.push_back(k);
         }
     }
@@ -57,18 +58,16 @@ void Quizmaster::jatek()
 
     /// Maga a játék menete ----------------------------------------------------------
     while(gin >> ev && ev.keycode != key_escape ) {
-        if(menu_return==0) draww.menu(ev);
+        //if(ev.type != ev_timer) std::cout  <<std::endl;
+        //std::cout << ev_timer ;
+        if(  menu_return==0 && ev.type == ev_timer) draww.menu(ev);
         if(ev.button == btn_left)  menu_return=1;
 
          if(menu_return==1) /// LETS PLAY ------------
         {
-            gin.timer(150);
-            while(gin >> ev && ev.keycode != key_escape ) {
-                        if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
-                        if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
-                        else if(mar_vege == -1)
+                draww.palyarajzol(_x,_y);
+                        if(mar_vege == -1)
                         {
-
 
 
 
@@ -105,15 +104,12 @@ void Quizmaster::jatek()
                                     elso ++;
 
                                 }
-                                draww.palyarajzol(_x,_y);
-
                         }
-            }
+                        else if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
+                        else if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
+
         }
     }
-
-
-
 
 
     for(int i=0;i<widgets.size();i++)
@@ -161,7 +157,7 @@ int Quizmaster::game_over(vector<Widget*>& widget,int oszto)
 
 
 
-int Quizmaster::egyezes_vizsgal(vector<Widget*>& widgets,int tipus,int hozzaad_szoroz)
+int Quizmaster::egyezes_vizsgal(vector<Widget*>& widgets,int tipus,int hozzaad_szoroz) const
 {
     int egyoszlopban=0;
     std::vector<bool> vizsgalt(widgets.size(), false);

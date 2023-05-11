@@ -22,15 +22,8 @@ using namespace genv;
 
 
 
- void Draw::palyarajzol(int x,int y)
+ void Draw::palyarajzol(int x,int y) const
 {
-    for (pehely* p : v) {
-        delete p;
-    }
-    v.clear();
-
-
-
     gout << refresh;
 
 
@@ -88,9 +81,11 @@ void Draw::game_over_screen(int tipus,int XX,int YY)
 
 
 
-int Draw::menu(genv::event ev)
+int Draw::menu(genv::event ev) const
 {
     gout << move_to(0,0) << color(0,0,0) << box(_XX,_YY);
+    genv::gout << genv::font("LiberationSans-Regular.ttf",25);
+
     for(pehely *p : v) /// range alapú for nagyon kényelmes, de csak akkor reagál megváltoztatásra, mert belemásolja p-be v-t
     {
         if(p){ p->mozog(); }
@@ -98,7 +93,7 @@ int Draw::menu(genv::event ev)
 
     }
 
-    gout << font("LiberationSans-Regular.ttf",35);
+    gout << font("LiberationSans-Regular.ttf",60);
 
         std::string s = "--- To start press left key ---";
         gout << color(255, 255, 255);

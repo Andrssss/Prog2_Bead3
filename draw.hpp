@@ -12,23 +12,32 @@ class Draw {
     vector<pehely*> v;
     int _XX,_YY;
 
-public:
-     Draw(int oszto,int XX,int YY) : _oszto(oszto),_XX(XX),_YY(YY){
 
-            for(int i=0; i < 50; i++)
+
+public:
+    /// ---- Konstruktorok ----
+     Draw(int oszto,int XX,int YY) : _oszto(oszto),_XX(XX),_YY(YY){
+            for(int i=0; i < 600; i++)
             {
                 pehely *p = new pehely(255,0,0,"X",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
                 v.push_back(p);
             }
-            for(int i=0; i < 50; i++)
+            for(int i=0; i < 600; i++)
             {
 
                 pehely *p = new pehely(0,0,255,"O",XX,YY); /// így ez teljesen új címet fog befoglalni ez azért jó, mert nem fog felül íródni
                 v.push_back(p);
             }
     }
-     void palyarajzol(int x,int y);
+    /// ---- Direktor ----
+    ~Draw() {}
+
+
+    /// ---- Függvények ----
+     void palyarajzol(int x,int y) const;
      static void game_over_screen(int tipus,int XX,int YY);
-     int menu(genv::event ev);
+     /// Függetlenség az objektum példányoktól: Ha egy függvényt static kulcsszóval jelölünk, akkor az nem függ semmilyen objektum példánytól.
+     /// Ez azt jelenti, hogy a függvényt közvetlenül az osztályra lehet meghívni, nem pedig egy adott objektumra
+     int menu(genv::event ev) const;
 };
 #endif // DRAW_HPP_INCLUDED

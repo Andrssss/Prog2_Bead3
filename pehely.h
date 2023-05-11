@@ -5,10 +5,13 @@
 
 struct pehely
 {
-public : /// hogy át tudjuk alakítani széppé
+protected:
     int x,y, _XX,_YY;
     int r, g, b;
     std::string s;
+
+public :
+    /// ---- Konstruktorok ----
     pehely(int rr,int gg,int bb,std::string ss,int XX,int YY)
     {
         _XX = XX;
@@ -23,9 +26,15 @@ public : /// hogy át tudjuk alakítani széppé
     }
 
 
-    void mozog();
-    void rajzol();
-    ///bool bent();
-};
+    /// ---- Direktor ----
+    ~pehely() {}
 
+
+    /// ---- Függvények ----
+    void mozog();
+    void rajzol() const;
+};
 #endif // PEHELY_H_INCLUDED
+
+
+

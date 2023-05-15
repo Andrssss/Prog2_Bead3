@@ -31,8 +31,8 @@ public :
 
 
     /// ---- Függvények ----
-    void mozog();
-    void rajzol() const;
+    virtual void mozog();
+    virtual void rajzol() const;
 };
 #endif // PEHELY_H_INCLUDED
 

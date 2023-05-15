@@ -25,7 +25,7 @@ public:
 
     /// ---- Függvények ----
     void jatek();
-    int game_over(vector<Widget*>& widgets,int oszto);
+    int game_over(vector<Widget*>& widgets,int oszto) const;
     int egyezes_vizsgal(vector<Widget*>& widgets,int tipus, int oszto) const;
     //bool sorellenorzes(vector<Widget*>& widgets,int tipus);
     //bool oszlopellenorzes(vector<Widget*>& widgets,int tipus);

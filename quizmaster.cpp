@@ -24,7 +24,7 @@ Quizmaster::Quizmaster(int x, int y,int oszto) : _x(x), _y(y), _oszto(oszto)
 
 
 //void Quizmaster::jatek(vector<Widget*>& widgets)
-void Quizmaster::jatek()
+void Quizmaster::jatek() /// -------------------------------------------------------------------------------------------
 {
     /// Alap beállítások a játékhoz ------------------------------------------------------------------
     genv::event ev;
@@ -60,25 +60,18 @@ void Quizmaster::jatek()
     while(gin >> ev && ev.keycode != key_escape ) {
         if(  menu_return==0 && ev.type == ev_timer) draww.menu(ev);
 
-
         if(ev.button == btn_left)
         {
             menu_return=1;
             draww.menu_freememory();
         }
 
-
-
-
-         if(menu_return==1) /// LETS PLAY ------------
+        if(menu_return==1) /// LETS PLAY ------------
         {
                 draww.palyarajzol(_x,_y);
                         if(mar_vege == -1)
                         {
-
-
-
-                                    /// TARTALOM KIIRAS
+                                    /// ELEMEK KIIRASA -----------------------------------------------------
                                     for (size_t i=0;i<widgets.size();i++) {
                                             //std::string s = std::to_string(i);
                                         if (widgets[i]->_tipus != 0 ) widgets[i]->draw();
@@ -90,7 +83,6 @@ void Quizmaster::jatek()
                                                     break;
                                             }
                                         }
-
                                         for(size_t i=0;i<widgets.size();i++){
                                             if(widgets[i]->_x == widgets[focus]->_x || widgets[i]->_y == widgets[focus]->_y )
                                             {
@@ -101,9 +93,9 @@ void Quizmaster::jatek()
                                 if (ev.button == btn_left && elso!=0 && widgets[focus]->_tipus==0) /// BEILLESZTÉS ----> TÖMB KEZELÉS
                                 {
                                         if(kor_szamolo%2 ) widgets[focus]->_tipus = 1 ; /// KÖR
-                                        else              widgets[focus]->_tipus = 2 ; /// X
+                                        else               widgets[focus]->_tipus = 2 ; /// X
                                         kor_szamolo ++;
-                                        if(kor_szamolo > 8) mar_vege = game_over(widgets,_oszto);
+                                        mar_vege = game_over(widgets,_oszto);
 
                                 }
                                 if(elso==0)
@@ -114,7 +106,6 @@ void Quizmaster::jatek()
                         }
                         else if(mar_vege == 1) draww.game_over_screen(1,_x,_y); /// KÖR win
                         else if(mar_vege == 2) draww.game_over_screen(2,_x,_y); /// X win
-
         }
     }
 
@@ -137,7 +128,7 @@ void Quizmaster::jatek()
 
 
 
-int Quizmaster::game_over(vector<Widget*>& widget,int oszto)
+int Quizmaster::game_over(vector<Widget*>& widget,int oszto) const /// -------------------------------------------------------------------------------------------
 {
     int return_ertek = -1;
 
@@ -164,7 +155,17 @@ int Quizmaster::game_over(vector<Widget*>& widget,int oszto)
 
 
 
-int Quizmaster::egyezes_vizsgal(vector<Widget*>& widgets,int tipus,int hozzaad_szoroz) const
+
+
+
+
+
+
+
+
+
+
+int Quizmaster::egyezes_vizsgal(vector<Widget*>& widgets,int tipus,int hozzaad_szoroz) const /// -------------------------------------------------------------------------------------------
 {
     int egyoszlopban=0;
     std::vector<bool> vizsgalt(widgets.size(), false);

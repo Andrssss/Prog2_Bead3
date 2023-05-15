@@ -33,15 +33,14 @@ void Draw::menu_freememory()
     gout << refresh;
 
 
-
     /// HÁTTÉR ------------------------------------
     gout << move_to(0,0) << color(0,0,0) << box(x,y);
+
+
 
     /// PÁLYA ------------------------------------
     int i_lepes = x/_oszto;
     int j_lepes = y/_oszto;
-    ///std::cout << i_lepes << " " << j_lepes << std::endl;
-
     gout << color(255,255,255);
     for(int i = i_lepes; i<x ; i+=i_lepes ) /// X rács rajzol
     {
@@ -52,12 +51,11 @@ void Draw::menu_freememory()
     {
         gout << move_to(0,j) << line_to(x,j);
     }
-    /// TÖMB ELEMEK ------------------------------------
 }
 
 
 
-void Draw::game_over_screen(int tipus,int XX,int YY)
+void Draw::game_over_screen(int tipus,int XX,int YY) const
 {
     gout << font("LiberationSans-Regular.ttf",100);
     if(tipus == 1)

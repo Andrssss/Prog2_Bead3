@@ -1,6 +1,5 @@
 #include "quizmaster.hpp"
-#include "draw.hpp"
-#include "widgets.hpp"
+
 
 
 
@@ -13,8 +12,10 @@ int main()
     int XX = 1000;
     int YY = 1000;
     int oszto = 20;
-    Quizmaster quiz(XX,YY,oszto);
 
+
+    /// játékhívás ---------------------------
+    Quizmaster quiz(XX,YY,oszto);
     quiz.jatek();
 
 

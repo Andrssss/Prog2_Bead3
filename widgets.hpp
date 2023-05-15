@@ -25,4 +25,7 @@ public:
     virtual void draw() const;
     virtual void szoveg_kozepre_irat(std::string s) const;
 };
+
+// Én plusz pontot kérek :)
+
 #endif // WIDGETS_HPP_INCLUDED
